@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://bj1dhv1qg4e0r"]
+
+[ext_resource type="Script" uid="uid://bwxsfh82s4oyt" path="res://entities/weapons/weapon_data.gd" id="1_br08l"]
+[ext_resource type="PackedScene" uid="uid://bjx16ck1v85x1" path="res://entities/weapons/sword_01/sword_01.tscn" id="2_kxk7e"]
+
+[resource]
+script = ExtResource("1_br08l")
+weapon_scene = ExtResource("2_kxk7e")
+weapon_tag = "Sword"
+metadata/_custom_type_script = "uid://bwxsfh82s4oyt"

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://rdsdjf07df5c"
-path="res://.godot/imported/TravelMode_Fwd.FBX-0801df3336669638d4704ffa6f143f5b.scn"
+uid="uid://cl7p4bxo12soy"
+path="res://.godot/imported/Attack_PrimaryA.FBX-85dcd7ebbcc7dc12f33811380621c58f.scn"
 
 [deps]
 
-source_file="res://entities/player/hero_character/anims/_import/TravelMode_Fwd.FBX"
-dest_files=["res://.godot/imported/TravelMode_Fwd.FBX-0801df3336669638d4704ffa6f143f5b.scn"]
+source_file="res://entities/player/hero_character/anims/_import/Attack_PrimaryA.FBX"
+dest_files=["res://.godot/imported/Attack_PrimaryA.FBX-85dcd7ebbcc7dc12f33811380621c58f.scn"]
 
 [params]
 
@@ -41,9 +41,9 @@ _subresources={
 "animations": {
 "Unreal Take": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/Animations/forward.res",
+"save_to_file/fallback_path": "res://entities/player/hero_character/anims/primary_attack_a.res",
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "uid://bxwmx8kac5ihy",
+"save_to_file/path": "uid://cxahy6q4jaivi",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

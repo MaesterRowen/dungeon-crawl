@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://7yua38y8p0t3"]
+
+[ext_resource type="PackedScene" uid="uid://bt808bkfawgnr" path="res://stages/test_dungeon/test_dungeon.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bv6ti3wo30g3q" path="res://entities/player/player.tscn" id="2_0xm2m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
+sky_horizon_color = Color(1.0671933, 1.1393452, 1.1829531, 1)
+ground_bottom_color = Color(0.41568628, 0.63529414, 0.7137255, 1)
+ground_horizon_color = Color(1.0671933, 1.1393452, 1.1829531, 1)
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_0xm2m"]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+
+[node name="NavigationRegion" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_0xm2m")
+
+[node name="Level_TestDungeon" parent="NavigationRegion" instance=ExtResource("1_ig7tw")]

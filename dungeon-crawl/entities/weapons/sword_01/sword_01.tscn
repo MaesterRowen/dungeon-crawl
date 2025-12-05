@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjx16ck1v85x1"]
+
+[ext_resource type="Script" uid="uid://dn4avt2txcj3m" path="res://entities/weapons/weapon.gd" id="1_58g1g"]
+[ext_resource type="Script" uid="uid://uowifw41mga0" path="res://systems/combat/hitbox.gd" id="2_vcp1d"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub7rg"]
+
+[node name="Sword01" type="Node3D" node_paths=PackedStringArray("hit_boxes")]
+script = ExtResource("1_58g1g")
+hit_boxes = [NodePath("HitBox")]
+metadata/_custom_type_script = "uid://dn4avt2txcj3m"
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="StaticMeshInstance" type="MeshInstance3D" parent="Visuals"]
+skeleton = NodePath("../..")
+
+[node name="HitBox" type="Area3D" parent="."]
+script = ExtResource("2_vcp1d")
+metadata/_custom_type_script = "uid://uowifw41mga0"
+
+[node name="CollisionShape" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("CapsuleShape3D_ub7rg")

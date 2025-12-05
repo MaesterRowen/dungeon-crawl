@@ -1,0 +1,13 @@
+[gd_resource type="AnimationNodeBlendSpace1D" load_steps=3 format=3 uid="uid://b7vyl3jhqjvd6"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5af0s"]
+animation = &"forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5qxtr"]
+animation = &"idle"
+
+[resource]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5af0s")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_5qxtr")
+blend_point_1/pos = 0.0

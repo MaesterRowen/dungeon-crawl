@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://rdsdjf07df5c"
-path="res://.godot/imported/TravelMode_Fwd.FBX-0801df3336669638d4704ffa6f143f5b.scn"
+uid="uid://7svdt5odpmkd"
+path="res://.godot/imported/Jump_Fall.FBX-cc2d5f72eda046511a31ae90e8230eff.scn"
 
 [deps]
 
-source_file="res://entities/player/hero_character/anims/_import/TravelMode_Fwd.FBX"
-dest_files=["res://.godot/imported/TravelMode_Fwd.FBX-0801df3336669638d4704ffa6f143f5b.scn"]
+source_file="res://entities/player/hero_character/anims/_import/Jump_Fall.FBX"
+dest_files=["res://.godot/imported/Jump_Fall.FBX-cc2d5f72eda046511a31ae90e8230eff.scn"]
 
 [params]
 
@@ -41,9 +41,9 @@ _subresources={
 "animations": {
 "Unreal Take": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/Animations/forward.res",
+"save_to_file/fallback_path": "res://assets/Animations/jump_fall.res",
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "uid://bxwmx8kac5ihy",
+"save_to_file/path": "uid://q3hqgfib3j6a",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
