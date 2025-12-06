@@ -10,6 +10,9 @@ extends CharacterBody3D
 @export var jump_impulse := 12.0
 @export var stopping_speed := 20.0
 
+@export_group("Combat")
+@export var active_weapon: WeaponData = null
+
 @onready var _character: HeroCharacter = %HeroCharacter
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera : Camera3D = %Camera3D
@@ -78,3 +81,11 @@ func _process_movement_input(delta: float) -> void:
 	velocity = velocity.move_toward(_move_direction * move_speed, acceleration * delta)
 	if is_equal_approx(_move_direction.length_squared(), 0.0) and velocity.length_squared() < stopping_speed:
 		velocity = Vector3.ZERO
+
+func _spawn_weapon() -> void:
+	if not active_weapon:
+		return
+	
+	var weapon_instance = active_weapon.weapon_scene.instantiate()
+	_character.add_child(weapon_instance)
+	

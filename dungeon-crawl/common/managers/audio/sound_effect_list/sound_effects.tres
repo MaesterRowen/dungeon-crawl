@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SoundEffectList" load_steps=3 format=3 uid="uid://v16ygcqyqy8l"]
+
+[ext_resource type="Script" uid="uid://b82mpje6yc18a" path="res://common/managers/audio/sound_effect_setting.gd" id="1_q4efh"]
+[ext_resource type="Script" uid="uid://7uaroelh51mv" path="res://common/managers/audio/sound_effect_list/sound_effect_list.gd" id="2_c63yq"]
+
+[resource]
+script = ExtResource("2_c63yq")
+data = Array[ExtResource("1_q4efh")]([null])
+metadata/_custom_type_script = "uid://7uaroelh51mv"

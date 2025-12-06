@@ -15,6 +15,10 @@ run/main_scene="uid://7yua38y8p0t3"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://bgcij50iqvwsu"
+
 [autoload]
 
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"

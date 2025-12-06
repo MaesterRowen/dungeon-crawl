@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv6ti3wo30g3q"]
+[gd_scene load_steps=7 format=3 uid="uid://bv6ti3wo30g3q"]
 
 [ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="PackedScene" uid="uid://duvmrsslohipu" path="res://entities/player/hero_character/hero_character.tscn" id="1_symyc"]
 [ext_resource type="Script" uid="uid://c1hl4hlurw1ml" path="res://common/components/health_component.gd" id="3_sglur"]
+[ext_resource type="Script" uid="uid://bebggy0l3np0u" path="res://systems/combat/weapon_handler.gd" id="4_bls4j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfv1e"]
 radius = 0.27001953
@@ -39,3 +40,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 script = ExtResource("3_sglur")
 max_health = 500.0
 metadata/_custom_type_script = "uid://c1hl4hlurw1ml"
+
+[node name="WeaponHandler" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("4_bls4j")
+character = NodePath("..")
+metadata/_custom_type_script = "uid://bebggy0l3np0u"

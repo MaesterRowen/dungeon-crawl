@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3 uid="uid://ckkwty68e4lpf"]
+
+[ext_resource type="Script" uid="uid://cwpdr1rklvxt6" path="res://entities/items/item_data.gd" id="1_5qy0v"]
+
+[resource]
+script = ExtResource("1_5qy0v")
+key = &"coin"
+type = 1
+display_name = "Coin"
+description = "Currency of the world."
+metadata/_custom_type_script = "uid://cwpdr1rklvxt6"

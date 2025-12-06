@@ -1,0 +1,15 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2oyddcrghvjc"]
+
+[ext_resource type="Script" uid="uid://ch5fcd0kl7uge" path="res://common/managers/audio/audio_manager.gd" id="1_8cvwo"]
+[ext_resource type="Script" uid="uid://b82mpje6yc18a" path="res://common/managers/audio/sound_effect_setting.gd" id="2_jtdo8"]
+[ext_resource type="Resource" uid="uid://b8ftde6jxron0" path="res://common/managers/audio/sound_effect_settings/sfx_chest_hit.tres" id="3_bw0oe"]
+[ext_resource type="Script" uid="uid://7uaroelh51mv" path="res://common/managers/audio/sound_effect_list/sound_effect_list.gd" id="4_b4v8a"]
+
+[sub_resource type="Resource" id="Resource_oisye"]
+script = ExtResource("4_b4v8a")
+data = Array[ExtResource("2_jtdo8")]([ExtResource("3_bw0oe")])
+metadata/_custom_type_script = "uid://7uaroelh51mv"
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_8cvwo")
+sound_effects = SubResource("Resource_oisye")

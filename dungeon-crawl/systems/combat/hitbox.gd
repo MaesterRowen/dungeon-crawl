@@ -3,6 +3,9 @@ class_name HitBox3D extends Area3D
 signal hit_target( hurtbox: HurtBox3D )
 signal pulled_from_target( hurtbox: HurtBox3D )
 
+func _init() -> void:
+	pass
+
 func _ready() -> void:
 	monitoring = false
 	monitorable =false

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=2 format=3 uid="uid://b8ftde6jxron0"]
+
+[ext_resource type="Script" uid="uid://b82mpje6yc18a" path="res://common/managers/audio/sound_effect_setting.gd" id="1_hcmgl"]
+
+[resource]
+script = ExtResource("1_hcmgl")
+audio_bus = &"SFX"
+metadata/_custom_type_script = "uid://b82mpje6yc18a"
