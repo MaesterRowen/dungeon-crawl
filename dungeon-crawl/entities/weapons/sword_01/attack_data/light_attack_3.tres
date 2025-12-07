@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=2 format=3 uid="uid://cr28yq8phclbq"]
+
+[ext_resource type="Script" uid="uid://cvuwk0c2cemux" path="res://systems/combat/attack_data.gd" id="1_6ptj2"]
+
+[resource]
+script = ExtResource("1_6ptj2")
+name = "light_attack_3"
+startup_time = 0.6
+active_time = 0.1
+recovery_time = 1.167
+time_scale_factor = 1.5
+animation_name = &"primary_attack_c"
+metadata/_custom_type_script = "uid://cvuwk0c2cemux"

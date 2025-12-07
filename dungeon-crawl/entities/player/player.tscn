@@ -1,13 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://bv6ti3wo30g3q"]
+[gd_scene load_steps=15 format=3 uid="uid://bv6ti3wo30g3q"]
 
 [ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="PackedScene" uid="uid://duvmrsslohipu" path="res://entities/player/hero_character/hero_character.tscn" id="1_symyc"]
+[ext_resource type="Script" uid="uid://dyapp46ilim15" path="res://systems/combat/hurtbox.gd" id="3_8fjmc"]
 [ext_resource type="Script" uid="uid://c1hl4hlurw1ml" path="res://common/components/health_component.gd" id="3_sglur"]
 [ext_resource type="Script" uid="uid://bebggy0l3np0u" path="res://systems/combat/weapon_handler.gd" id="4_bls4j"]
+[ext_resource type="Script" uid="uid://b6twvppuki0oe" path="res://systems/combat/combat_component.gd" id="5_fkugw"]
+[ext_resource type="Script" uid="uid://ddleiwlt36cut" path="res://systems/combat/attack_controller.gd" id="7_qiwj3"]
+[ext_resource type="Script" uid="uid://cvuwk0c2cemux" path="res://systems/combat/attack_data.gd" id="8_7thud"]
+[ext_resource type="Resource" uid="uid://cr28yq8phclbq" path="res://entities/weapons/sword_01/attack_data/light_attack_3.tres" id="9_a1qjk"]
+[ext_resource type="Resource" uid="uid://d3j1pupy8bpml" path="res://entities/weapons/sword_01/attack_data/light_attack_1.tres" id="10_j3ovn"]
+[ext_resource type="Resource" uid="uid://efrlr6m2dkk5" path="res://entities/weapons/sword_01/attack_data/light_attack_2.tres" id="11_afbqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfv1e"]
 radius = 0.27001953
 height = 1.6635742
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qiwj3"]
+radius = 0.30810547
+height = 1.2316895
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_symyc"]
 
@@ -22,6 +33,14 @@ shape = SubResource("CapsuleShape3D_sfv1e")
 
 [node name="HeroCharacter" parent="." instance=ExtResource("1_symyc")]
 unique_name_in_owner = true
+
+[node name="HurtBox3D" type="Area3D" parent="HeroCharacter"]
+script = ExtResource("3_8fjmc")
+metadata/_custom_type_script = "uid://dyapp46ilim15"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeroCharacter/HurtBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90808105, 0)
+shape = SubResource("CapsuleShape3D_qiwj3")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -45,3 +64,21 @@ metadata/_custom_type_script = "uid://c1hl4hlurw1ml"
 script = ExtResource("4_bls4j")
 character = NodePath("..")
 metadata/_custom_type_script = "uid://bebggy0l3np0u"
+
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox", "health_component", "weapon_handler")]
+script = ExtResource("5_fkugw")
+hurtbox = NodePath("../HeroCharacter/HurtBox3D")
+health_component = NodePath("../HealthComponent")
+weapon_handler = NodePath("../WeaponHandler")
+metadata/_custom_type_script = "uid://b6twvppuki0oe"
+
+[node name="AttackController" type="Node" parent="." node_paths=PackedStringArray("character", "weapon_handler")]
+script = ExtResource("7_qiwj3")
+character = NodePath("..")
+weapon_handler = NodePath("../WeaponHandler")
+combo_tree = Dictionary[String, ExtResource("8_7thud")]({
+"light_attack_1": ExtResource("10_j3ovn"),
+"light_attack_2": ExtResource("11_afbqv"),
+"light_attack_3": ExtResource("9_a1qjk")
+})
+metadata/_custom_type_script = "uid://ddleiwlt36cut"

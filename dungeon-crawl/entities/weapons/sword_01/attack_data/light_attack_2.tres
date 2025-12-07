@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=2 format=3 uid="uid://efrlr6m2dkk5"]
+
+[ext_resource type="Script" uid="uid://cvuwk0c2cemux" path="res://systems/combat/attack_data.gd" id="1_cyoc5"]
+
+[resource]
+script = ExtResource("1_cyoc5")
+name = "light_attack_2"
+startup_time = 0.38
+active_time = 0.1
+recovery_time = 1.3
+time_scale_factor = 1.5
+can_cancel_on_hit = true
+cancel_window_start = 0.35
+cancel_window_end = 0.55
+next_attacks = Array[String](["light_attack_3"])
+animation_name = &"primary_attack_b"
+metadata/_custom_type_script = "uid://cvuwk0c2cemux"

@@ -17,16 +17,36 @@ extends CharacterBody3D
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _camera : Camera3D = %Camera3D
 
+@onready var _combat_component : CombatComponent = $CombatComponent
+@onready var attack_controller: AttackController = $AttackController
+
+
 var _move_direction := Vector3.ZERO
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.FORWARD
 var _gravity := -30.0
+
+func _ready() -> void:
+	attack_controller.attack_started.connect(_on_attack_started)
+	
+	# Connect to Animation Notify Signals
+	_character.anim_notify_start_damage.connect(attack_controller.phase_enter_active)
+	_character.anim_notify_stop_damage.connect(attack_controller.phase_exit_active)
+	_character.anim_notify_exit_recovery.connect(attack_controller.phase_exit_recovery)
+	_character.anim_notify_open_cancel.connect(attack_controller.enable_cancel)
+	_character.anim_notify_close_cancel.connect(attack_controller.disable_cancel)
+	
+func _on_attack_started( attack: AttackData ) -> void:
+	_character.play_attack(attack.animation_name)
 
 func _input( event: InputEvent ) -> void:
 	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
+	if event.is_action_pressed("light_attack"):
+		attack_controller.request_attack("light_attack")
 
 func _unhandled_input( event: InputEvent ) -> void:
 	var is_camera_motion := (

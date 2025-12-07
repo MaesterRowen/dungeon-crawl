@@ -32,8 +32,7 @@ func register_spawned_weapon(weapon_tag: StringName, weapon: Weapon3D, equip_now
 	_carried_weapon_map[weapon_tag] = weapon
 	
 	# Connect hit events
-	weapon.onWeaponHitTarget.connect(_on_weapon_hit_target)
-	weapon.onWeaponPulledFromTarget.connect(_on_weapon_pulled_from_target)
+	weapon.weapon_hit.connect(_on_weapon_hit)
 	
 	if equip_now:
 		equip_weapon(weapon_tag)
@@ -94,7 +93,10 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if not character:
 		warnings.append("Character must be set for this node to function properly")
 	return warnings
-	
+
+func _on_weapon_hit( info: HitInfo ) -> void:
+	weapon_hit.emit(info)
+
 func _on_weapon_hit_target(target: Node3D) -> void:
 	# Prevent duplicate hits in same attack window
 	if _overlapped_objects.has(target):
