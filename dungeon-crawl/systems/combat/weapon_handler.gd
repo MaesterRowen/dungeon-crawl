@@ -60,6 +60,9 @@ func unequip_current_weapon() -> void:
 	weapon_unequipped.emit(weapon)
 	_current_equipped_weapon_tag = ""
 
+func can_attack() -> bool:
+	return _current_equipped_weapon_tag != ""
+
 func get_current_weapon() -> Weapon3D:
 	if _carried_weapon_map.has(_current_equipped_weapon_tag):
 		return _carried_weapon_map[_current_equipped_weapon_tag]
@@ -95,16 +98,5 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warnings
 
 func _on_weapon_hit( info: HitInfo ) -> void:
+	info.origin_actor = character
 	weapon_hit.emit(info)
-
-func _on_weapon_hit_target(target: Node3D) -> void:
-	# Prevent duplicate hits in same attack window
-	if _overlapped_objects.has(target):
-		return
-	
-	_overlapped_objects.append(target)
-	
-	weapon_hit.emit(target, get_current_weapon())
-	
-func _on_weapon_pulled_from_target(target: Node3D) -> void:
-	_overlapped_objects.erase(target)

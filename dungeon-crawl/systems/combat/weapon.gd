@@ -20,11 +20,10 @@ func _collect_hitboxes() -> void:
 
 func toggleWeaponCollision(state: bool) -> void:
 	for hitbox in hitboxes:
-		hitbox.monitoring = state
+		hitbox.enabled = state
 
 func _on_hit_started( info: HitInfo ) -> void:
 	# Decorate hit info
 	info.damage = base_damage
 	info.source_weapon = self
-	info.origin_actor = owner_actor
 	weapon_hit.emit(info)

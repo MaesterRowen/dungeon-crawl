@@ -41,8 +41,8 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ffmip")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub7rg"]
-radius = 0.12939453
-height = 1.2438965
+radius = 0.39257813
+height = 1.3105164
 
 [node name="Sword01" type="Node3D"]
 script = ExtResource("1_58g1g")
@@ -56,9 +56,12 @@ mesh = SubResource("ArrayMesh_58g1g")
 skeleton = NodePath("")
 
 [node name="HitBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 10
+monitorable = false
 script = ExtResource("2_vcp1d")
 metadata/_custom_type_script = "uid://uowifw41mga0"
 
 [node name="CollisionShape" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7191162, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75242615, 0)
 shape = SubResource("CapsuleShape3D_ub7rg")

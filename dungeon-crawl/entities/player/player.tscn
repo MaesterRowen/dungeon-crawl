@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bv6ti3wo30g3q"]
+[gd_scene load_steps=16 format=3 uid="uid://bv6ti3wo30g3q"]
 
 [ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="PackedScene" uid="uid://duvmrsslohipu" path="res://entities/player/hero_character/hero_character.tscn" id="1_symyc"]
+[ext_resource type="Resource" uid="uid://bj1dhv1qg4e0r" path="res://entities/weapons/sword_01/sword01.tres" id="2_a1qjk"]
 [ext_resource type="Script" uid="uid://dyapp46ilim15" path="res://systems/combat/hurtbox.gd" id="3_8fjmc"]
 [ext_resource type="Script" uid="uid://c1hl4hlurw1ml" path="res://common/components/health_component.gd" id="3_sglur"]
 [ext_resource type="Script" uid="uid://bebggy0l3np0u" path="res://systems/combat/weapon_handler.gd" id="4_bls4j"]
@@ -26,6 +27,7 @@ height = 1.2316895
 collision_layer = 4
 script = ExtResource("1_abrql")
 acceleration = 30.0
+active_weapon = ExtResource("2_a1qjk")
 
 [node name="CapsuleCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8317871, 0)
@@ -47,7 +49,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
-collision_mask = 3
 shape = SubResource("SphereShape3D_symyc")
 spring_length = 6.0
 

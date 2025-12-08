@@ -2,12 +2,11 @@ class_name HurtBox3D extends Area3D
 
 signal hurtbox_hit( info: HitInfo )
 
-var owner_actor : Node = null
-var damage_multiplier : float = 1.0
-var invulnterable : bool = false
+@export var owner_actor : Node = null
+var invulnerable : bool = false
 
 func receive_hit(info: HitInfo ) -> void:
-	if invulnterable:
+	if invulnerable:
 		return
 	
 	info.target_actor = owner_actor

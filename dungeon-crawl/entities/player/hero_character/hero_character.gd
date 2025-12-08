@@ -12,6 +12,9 @@ signal anim_notify_close_cancel
 func _ready() -> void:
 	anim_tree.active = true
 
+func get_weapon_socket() -> Node3D:
+	return %RightHandSocket as Node3D
+
 func set_player_speed(ratio: float) -> void:
 	ratio = clampf(ratio, 0.0, 1.0)
 	anim_tree.set("parameters/locomotion/blend_position", ratio)

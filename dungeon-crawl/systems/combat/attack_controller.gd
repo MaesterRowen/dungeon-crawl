@@ -11,13 +11,16 @@ var current_attack: AttackData
 
 var next_attack_name : String = ""
 var can_queue_next : bool = false
-var can_cancel_on_hit : bool = true
-var attack_start_time : float = 0.0
+var can_cancel_on_hit : bool = false
 
 func _ready() -> void:
 	pass
 	
 func request_attack(attack_name: String) -> void:
+	# If we don't have a weapon equipped, then we can't attack
+	if weapon_handler and not weapon_handler.can_attack():
+		return
+	
 	# Case 1: No attack active -> start immediately
 	if current_attack == null:
 		var first_attack := _find_first_attack(attack_name)
@@ -53,23 +56,21 @@ func _start_attack(attack_name: String) -> void:
 	current_attack = combo_tree[attack_name]
 	next_attack_name = ""
 	can_queue_next = false
-	can_cancel_on_hit = true
-	attack_start_time = Time.get_ticks_msec() / 1000.0
+	can_cancel_on_hit = false
 	
 	# Emit Signal
 	attack_started.emit(current_attack)
 
 func phase_enter_active() -> void:
-	print("ACTIVE: weapon hitboxes ON")
+	print("HIT BOX ACTIVE")
 	weapon_handler.toggle_weapon_collision(true)
 
 func phase_exit_active() -> void:
-	print("ACTIVE: weapon hitboxes OFF")
+	print("HIT BOX INACTIVE")
 	weapon_handler.toggle_weapon_collision(false)
 	can_queue_next = true
 
 func phase_exit_recovery() -> void:
-	print("ATTACK FINISHED: ", current_attack.name)
 	# Emit signal attack finished
 	attack_ended.emit(current_attack)
 	

@@ -6,7 +6,7 @@ signal hit_ended( hit_info: HitInfo )
 var enabled: bool = true
 
 func _ready() -> void:
-	monitoring = false
+	monitoring = true
 	monitorable = false
 	
 	area_entered.connect(_on_hitbox_area_entered)
@@ -20,6 +20,7 @@ func _on_hitbox_area_entered(other: Area3D) -> void:
 		var info : HitInfo = HitInfo.new()	
 		info.hitbox = self
 		info.hurtbox = other as HurtBox3D
+		info.target_actor = info.hurtbox.owner_actor
 		hit_started.emit(info)
 		
 func _on_hitbox_area_exited(other: Area3D) -> void:
@@ -30,4 +31,5 @@ func _on_hitbox_area_exited(other: Area3D) -> void:
 		var info : HitInfo = HitInfo.new()	
 		info.hitbox = self
 		info.hurtbox = other as HurtBox3D
+		info.target_actor = info.hurtbox.owner_actor
 		hit_ended.emit(info)

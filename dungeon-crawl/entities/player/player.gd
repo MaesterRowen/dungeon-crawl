@@ -19,6 +19,7 @@ extends CharacterBody3D
 
 @onready var _combat_component : CombatComponent = $CombatComponent
 @onready var attack_controller: AttackController = $AttackController
+@onready var weapon_handler: WeaponHandler = $WeaponHandler
 
 
 var _move_direction := Vector3.ZERO
@@ -35,6 +36,9 @@ func _ready() -> void:
 	_character.anim_notify_exit_recovery.connect(attack_controller.phase_exit_recovery)
 	_character.anim_notify_open_cancel.connect(attack_controller.enable_cancel)
 	_character.anim_notify_close_cancel.connect(attack_controller.disable_cancel)
+	
+	# Equip Weapon
+	_spawn_weapon()
 	
 func _on_attack_started( attack: AttackData ) -> void:
 	_character.play_attack(attack.animation_name)
@@ -107,5 +111,5 @@ func _spawn_weapon() -> void:
 		return
 	
 	var weapon_instance = active_weapon.weapon_scene.instantiate()
-	_character.add_child(weapon_instance)
-	
+	weapon_handler.register_spawned_weapon(active_weapon.weapon_tag, weapon_instance, true)
+	_character.get_weapon_socket().add_child(weapon_instance)	

@@ -7,5 +7,6 @@ var hurtbox : HurtBox3D = null
 var source_weapon: Node = null
 var damage : float = 0.0
 var attack_type: String = "melee"
+var hit_direction : Vector3 = Vector3.ZERO
 var knockback: Vector3  = Vector3.ZERO
 var metadata : Dictionary = {}
