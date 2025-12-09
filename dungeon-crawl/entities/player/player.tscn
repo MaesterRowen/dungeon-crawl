@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bv6ti3wo30g3q"]
+[gd_scene load_steps=17 format=3 uid="uid://bv6ti3wo30g3q"]
 
 [ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="PackedScene" uid="uid://duvmrsslohipu" path="res://entities/player/hero_character/hero_character.tscn" id="1_symyc"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://cr28yq8phclbq" path="res://entities/weapons/sword_01/attack_data/light_attack_3.tres" id="9_a1qjk"]
 [ext_resource type="Resource" uid="uid://d3j1pupy8bpml" path="res://entities/weapons/sword_01/attack_data/light_attack_1.tres" id="10_j3ovn"]
 [ext_resource type="Resource" uid="uid://efrlr6m2dkk5" path="res://entities/weapons/sword_01/attack_data/light_attack_2.tres" id="11_afbqv"]
+[ext_resource type="Script" uid="uid://dty2134yb765e" path="res://systems/inventory/inventory_component.gd" id="13_j3ovn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfv1e"]
 radius = 0.27001953
@@ -23,7 +24,7 @@ height = 1.2316895
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_symyc"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 4
 script = ExtResource("1_abrql")
 acceleration = 30.0
@@ -83,3 +84,7 @@ combo_tree = Dictionary[String, ExtResource("8_7thud")]({
 "light_attack_3": ExtResource("9_a1qjk")
 })
 metadata/_custom_type_script = "uid://ddleiwlt36cut"
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("13_j3ovn")
+metadata/_custom_type_script = "uid://dty2134yb765e"

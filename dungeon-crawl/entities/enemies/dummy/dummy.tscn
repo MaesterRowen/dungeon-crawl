@@ -1,9 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://doydhobeyonwj"]
+[gd_scene load_steps=15 format=3 uid="uid://doydhobeyonwj"]
 
 [ext_resource type="Script" uid="uid://cm7w7q1hnyvc7" path="res://entities/enemies/dummy/dummy.gd" id="1_vcfes"]
 [ext_resource type="Script" uid="uid://dyapp46ilim15" path="res://systems/combat/hurtbox.gd" id="2_jqhjf"]
 [ext_resource type="Script" uid="uid://b6twvppuki0oe" path="res://systems/combat/combat_component.gd" id="3_wygqe"]
 [ext_resource type="Script" uid="uid://c1hl4hlurw1ml" path="res://common/components/health_component.gd" id="4_ecs34"]
+[ext_resource type="Script" uid="uid://bebggy0l3np0u" path="res://systems/combat/weapon_handler.gd" id="4_nylev"]
+[ext_resource type="Script" uid="uid://ddleiwlt36cut" path="res://systems/combat/attack_controller.gd" id="5_7hp74"]
+[ext_resource type="Script" uid="uid://bdc5x4gc1jcne" path="res://common/utilities/state_machine/state_machine.gd" id="6_2thbc"]
+[ext_resource type="Script" uid="uid://dsfankytnstox" path="res://common/components/ai_controller.gd" id="6_mxod1"]
+[ext_resource type="Script" uid="uid://c7iwr3e4womks" path="res://common/components/perception_component.gd" id="7_2thbc"]
+[ext_resource type="Script" uid="uid://b62lvtgtd32bu" path="res://entities/enemies/dummy/states/dummy_idle.gd" id="7_x2exh"]
+[ext_resource type="Script" uid="uid://bd3kp81yxfjo5" path="res://entities/enemies/dummy/states/dummy_wander.gd" id="11_78rvw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_78rvw"]
+height = 1.496582
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcfes"]
 albedo_color = Color(0.67560554, 0, 0.19665894, 1)
@@ -11,19 +21,26 @@ albedo_color = Color(0.67560554, 0, 0.19665894, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ya8n0"]
 height = 1.5
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_vcfes"]
-
 [node name="Dummy" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 15
 script = ExtResource("1_vcfes")
+
+[node name="CharacterCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7519531, 0)
+shape = SubResource("CapsuleShape3D_78rvw")
 
 [node name="Visuals" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Visuals"]
-use_collision = true
 collision_mask = 0
 height = 1.5
 material = SubResource("StandardMaterial3D_vcfes")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42008853, -0.323956)
+size = Vector3(0.6533203, 0.12011719, 0.39160156)
 
 [node name="HurtBox3D" type="Area3D" parent="." node_paths=PackedStringArray("owner_actor")]
 collision_layer = 8
@@ -37,16 +54,63 @@ metadata/_custom_type_script = "uid://dyapp46ilim15"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CylinderShape3D_ya8n0")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_vcfes")
+[node name="PerceptionComponent" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_2thbc")
+vision_angle = 135.0
+vision_layer_mask = 4
+metadata/_custom_type_script = "uid://c7iwr3e4womks"
 
-[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox", "health_component")]
+[node name="StateMachineAI" type="Node" parent="."]
+script = ExtResource("6_2thbc")
+initial_state = "Wander"
+metadata/_custom_type_script = "uid://bdc5x4gc1jcne"
+
+[node name="Idle" type="Node" parent="StateMachineAI" node_paths=PackedStringArray("controller", "perception")]
+script = ExtResource("7_x2exh")
+controller = NodePath("../../AIController")
+perception = NodePath("../../PerceptionComponent")
+idle_time_min = 3.0
+idle_time_max = 5.0
+turn_speed = 8.0
+
+[node name="Wander" type="Node" parent="StateMachineAI" node_paths=PackedStringArray("controller", "perception")]
+script = ExtResource("11_78rvw")
+controller = NodePath("../../AIController")
+perception = NodePath("../../PerceptionComponent")
+wander_radius = 30.0
+min_wander_distance = 8.0
+
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox", "health_component", "weapon_handler")]
 script = ExtResource("3_wygqe")
 hurtbox = NodePath("../HurtBox3D")
 health_component = NodePath("../HealthComponent")
+weapon_handler = NodePath("../WeaponHandler")
 metadata/_custom_type_script = "uid://b6twvppuki0oe"
+
+[node name="WeaponHandler" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("4_nylev")
+character = NodePath("..")
+metadata/_custom_type_script = "uid://bebggy0l3np0u"
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_ecs34")
 max_health = 100.0
 metadata/_custom_type_script = "uid://c1hl4hlurw1ml"
+
+[node name="AttackController" type="Node" parent="." node_paths=PackedStringArray("character", "weapon_handler")]
+script = ExtResource("5_7hp74")
+character = NodePath("..")
+weapon_handler = NodePath("../WeaponHandler")
+metadata/_custom_type_script = "uid://ddleiwlt36cut"
+
+[node name="AIController" type="Node" parent="." node_paths=PackedStringArray("character", "agent")]
+script = ExtResource("6_mxod1")
+character = NodePath("..")
+agent = NodePath("../NavigationAgent3D")
+metadata/_custom_type_script = "uid://dsfankytnstox"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_path_custom_color = Color(1, 0, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

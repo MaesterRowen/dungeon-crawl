@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0kcryoabc65r"]
+
+[ext_resource type="Script" uid="uid://ci77swn5a5h55" path="res://systems/interaction/interacting_component.gd" id="1_lo7hy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_op400"]
+radius = 0.6
+
+[node name="InteractingComponent" type="Node3D"]
+script = ExtResource("1_lo7hy")
+
+[node name="InteractRange" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractRange"]
+shape = SubResource("SphereShape3D_op400")
+
+[node name="InteractionPrompt" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Press E to Interact"
+
+[connection signal="area_entered" from="InteractRange" to="." method="_on_interact_range_area_entered"]
+[connection signal="area_exited" from="InteractRange" to="." method="_on_interact_range_area_exited"]

@@ -62,11 +62,11 @@ func _start_attack(attack_name: String) -> void:
 	attack_started.emit(current_attack)
 
 func phase_enter_active() -> void:
-	print("HIT BOX ACTIVE")
+	#print("HIT BOX ACTIVE")
 	weapon_handler.toggle_weapon_collision(true)
 
 func phase_exit_active() -> void:
-	print("HIT BOX INACTIVE")
+	#print("HIT BOX INACTIVE")
 	weapon_handler.toggle_weapon_collision(false)
 	can_queue_next = true
 
