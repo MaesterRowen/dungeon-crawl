@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bt808bkfawgnr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w838b"]
-albedo_color = Color(0.4974739, 0.49747366, 0.49747354, 1)
+albedo_color = Color(0.22670749, 0.22670749, 0.22670746, 1)
 
 [node name="Level_TestDungeon" type="Node3D"]
 
@@ -24,5 +24,33 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 use_collision = true
 collision_mask = 0
-size = Vector3(40, 0.5, 40)
+size = Vector3(50, 0.5, 50)
+material = SubResource("StandardMaterial3D_w838b")
+
+[node name="Wall1" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -24.5)
+use_collision = true
+collision_mask = 0
+size = Vector3(50, 4, 1)
+material = SubResource("StandardMaterial3D_w838b")
+
+[node name="Wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 24.5)
+use_collision = true
+collision_mask = 0
+size = Vector3(50, 4, 1)
+material = SubResource("StandardMaterial3D_w838b")
+
+[node name="Wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -24.5, 2, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(48, 4, 1)
+material = SubResource("StandardMaterial3D_w838b")
+
+[node name="Wall4" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 24.5, 2, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(48, 4, 1)
 material = SubResource("StandardMaterial3D_w838b")

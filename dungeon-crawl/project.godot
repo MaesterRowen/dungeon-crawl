@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://bgcij50iqvwsu"
 [autoload]
 
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+AudioManager="*res://common/managers/audio/audio_manager.tscn"
 
 [dotnet]
 
