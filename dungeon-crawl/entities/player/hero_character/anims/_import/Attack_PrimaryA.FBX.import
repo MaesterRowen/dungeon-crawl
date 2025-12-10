@@ -42,7 +42,7 @@ _subresources={
 "Unreal Take": {
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://entities/player/hero_character/anims/primary_attack_a.res",
-"save_to_file/keep_custom_tracks": "",
+"save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://cxahy6q4jaivi",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
