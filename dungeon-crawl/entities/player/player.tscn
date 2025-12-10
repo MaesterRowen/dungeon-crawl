@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bv6ti3wo30g3q"]
+[gd_scene load_steps=18 format=3 uid="uid://bv6ti3wo30g3q"]
 
 [ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="PackedScene" uid="uid://duvmrsslohipu" path="res://entities/player/hero_character/hero_character.tscn" id="1_symyc"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://d3j1pupy8bpml" path="res://entities/weapons/sword_01/attack_data/light_attack_1.tres" id="10_j3ovn"]
 [ext_resource type="Resource" uid="uid://efrlr6m2dkk5" path="res://entities/weapons/sword_01/attack_data/light_attack_2.tres" id="11_afbqv"]
 [ext_resource type="Script" uid="uid://dty2134yb765e" path="res://systems/inventory/inventory_component.gd" id="13_j3ovn"]
+[ext_resource type="PackedScene" uid="uid://c0kcryoabc65r" path="res://systems/interaction/interacting_component.tscn" id="14_afbqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfv1e"]
 radius = 0.27001953
@@ -44,6 +45,9 @@ metadata/_custom_type_script = "uid://dyapp46ilim15"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeroCharacter/HurtBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90808105, 0)
 shape = SubResource("CapsuleShape3D_qiwj3")
+
+[node name="InteractingComponent" parent="HeroCharacter" instance=ExtResource("14_afbqv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7330661, -0.6911343)
 
 [node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true

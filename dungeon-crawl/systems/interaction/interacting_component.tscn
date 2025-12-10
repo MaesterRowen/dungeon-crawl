@@ -9,6 +9,8 @@ radius = 0.6
 script = ExtResource("1_lo7hy")
 
 [node name="InteractRange" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractRange"]
 shape = SubResource("SphereShape3D_op400")

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SoundEffect" load_steps=2 format=3 uid="uid://b8ftde6jxron0"]
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://b8ftde6jxron0"]
 
 [ext_resource type="Script" uid="uid://b82mpje6yc18a" path="res://common/managers/audio/sound_effect_setting.gd" id="1_hcmgl"]
+[ext_resource type="AudioStream" uid="uid://b54q3gjkmr4d0" path="res://assets/sounds/Hit_Generic_2-1.WAV" id="2_oj3xa"]
 
 [resource]
 script = ExtResource("1_hcmgl")
-audio_bus = &"SFX"
+sound_effect = ExtResource("2_oj3xa")
 metadata/_custom_type_script = "uid://b82mpje6yc18a"

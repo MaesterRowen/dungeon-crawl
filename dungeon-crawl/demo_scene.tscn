@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://bllr5nd138vyi"]
+
+[ext_resource type="Texture2D" uid="uid://dsxh3r41s87ay" path="res://entities/skysphere/PartlyCloudy_2K.exr" id="1_1hm1i"]
+[ext_resource type="PackedScene" uid="uid://bv6ti3wo30g3q" path="res://entities/player/player.tscn" id="2_om45m"]
+[ext_resource type="PackedScene" uid="uid://ubk6odpht8bd" path="res://vfx/vfx_level_up.tscn" id="3_ayuu8"]
+[ext_resource type="PackedScene" uid="uid://b25tmbo2b5323" path="res://entities/objects/interactables/treasure_chest/treasure_chest.tscn" id="4_ctgmk"]
+[ext_resource type="PackedScene" uid="uid://cclnvkecpvvt2" path="res://entities/objects/breakables/barrel/barrel.tscn" id="4_mssda"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lquwl"]
+panorama = ExtResource("1_1hm1i")
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("PanoramaSkyMaterial_lquwl")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+fog_light_color = Color(0.25304982, 0.44631344, 1, 1)
+fog_density = 0.001
+fog_sky_affect = 0.1
+adjustment_enabled = true
+adjustment_saturation = 1.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w838b"]
+albedo_color = Color(0.22670749, 0.22670749, 0.22670746, 1)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.98821235, -0.13257927, 0.07654463, 2.5945058e-08, 0.49999988, 0.8660253, -0.1530893, -0.85581696, 0.49410602, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_om45m")]
+
+[node name="Level_TestDungeon" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Level_TestDungeon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(50, 0.5, 50)
+material = SubResource("StandardMaterial3D_w838b")
+
+[node name="VFX_LevelUp" parent="." instance=ExtResource("3_ayuu8")]
+
+[node name="TreasureChest" parent="." instance=ExtResource("4_ctgmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8400097, 6.9726415, -12.079309)
+
+[node name="Barrel" parent="." instance=ExtResource("4_mssda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[editable path="VFX_LevelUp"]

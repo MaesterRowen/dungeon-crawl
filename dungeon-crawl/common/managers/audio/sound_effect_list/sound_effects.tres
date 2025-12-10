@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SoundEffectList" load_steps=3 format=3 uid="uid://v16ygcqyqy8l"]
+[gd_resource type="Resource" script_class="SoundEffectList" load_steps=4 format=3 uid="uid://v16ygcqyqy8l"]
 
 [ext_resource type="Script" uid="uid://b82mpje6yc18a" path="res://common/managers/audio/sound_effect_setting.gd" id="1_q4efh"]
 [ext_resource type="Script" uid="uid://7uaroelh51mv" path="res://common/managers/audio/sound_effect_list/sound_effect_list.gd" id="2_c63yq"]
+[ext_resource type="Resource" uid="uid://b8ftde6jxron0" path="res://common/managers/audio/sound_effect_settings/sfx_chest_hit.tres" id="2_j6cuo"]
 
 [resource]
 script = ExtResource("2_c63yq")
-data = Array[ExtResource("1_q4efh")]([null])
+data = Array[ExtResource("1_q4efh")]([ExtResource("2_j6cuo")])
 metadata/_custom_type_script = "uid://7uaroelh51mv"
