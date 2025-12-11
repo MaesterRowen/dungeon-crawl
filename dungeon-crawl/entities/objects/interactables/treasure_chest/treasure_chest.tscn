@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=4 uid="uid://b25tmbo2b5323"]
+[gd_scene load_steps=15 format=4 uid="uid://b25tmbo2b5323"]
 
 [ext_resource type="Texture2D" uid="uid://c72s0fykcvrtc" path="res://assets/_thirdparty/kaykit_dungeon_remastered/dungeon_texture.png" id="1_f5vv8"]
 [ext_resource type="Script" uid="uid://cput4t0xs5vh5" path="res://entities/objects/interactables/treasure_chest/treasure_chest.gd" id="1_p6pq8"]
 [ext_resource type="Script" uid="uid://b5vlxw31ke44" path="res://systems/interaction/interactable.gd" id="4_5bxtv"]
 [ext_resource type="AudioStream" uid="uid://b5b7qj3rjue66" path="res://assets/sounds/door_open.wav" id="4_qebvp"]
-[ext_resource type="Script" uid="uid://da018a841p3fk" path="res://common/components/particle_movement_component.gd" id="5_p6pq8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejwnr"]
 resource_name = "texture"
@@ -159,10 +158,3 @@ libraries = {
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_qebvp")
 bus = &"SFX"
-
-[node name="ProjectileMovementComponent" type="Node" parent="."]
-script = ExtResource("5_p6pq8")
-gravity = -5.0
-velocity = Vector3(10, 2, 0)
-destroy_on_impact = false
-metadata/_custom_type_script = "uid://da018a841p3fk"
