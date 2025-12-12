@@ -3,6 +3,8 @@ class_name ProjectileMovementComponent extends Node
 signal projectile_bounce( hit_result: Dictionary, velocity: Vector3)
 signal projectile_stop( hit_result: Dictionary)
 
+@export var collision_volume : Area3D
+
 @export var destroy_after_seconds := 60.0
 @export var use_gravity := true
 @export var velocity : Vector3 = Vector3.ZERO
@@ -93,6 +95,7 @@ func _physics_process(delta: float) -> void:
 			return
 		
 		# Check for collisions
+		
 		var from: Vector3 = controlled_node.global_position
 		var to: Vector3 = from + velocity * delta
 		var space = controlled_node.get_world_3d().direct_space_state
