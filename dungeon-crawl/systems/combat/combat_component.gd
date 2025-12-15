@@ -3,6 +3,7 @@ class_name CombatComponent extends Node
 signal dealt_damage(amount: float, hit_info: HitInfo)
 signal received_damage(amount: float, hit_info: HitInfo)
 
+@export var hit_effect: PackedScene
 @export var hurtbox: HurtBox3D
 @export var health_component : HealthComponent
 @export var weapon_handler : WeaponHandler
@@ -23,6 +24,10 @@ func _on_weapon_hit(info: HitInfo) -> void:
 	info.knockback = Vector3.ZERO # no knockback
 	info.hit_direction = (info.target_actor.global_position - info.origin_actor.global_position).normalized()
 	if is_instance_valid(info.hurtbox):
+		if hit_effect:
+			var inst = hit_effect.instantiate() as Node3D
+			get_tree().current_scene.add_child(inst)
+			inst.global_position = info.hurtbox.global_position
 		info.hurtbox.receive_hit(info)
 
 func _on_hurtbox_hit( info: HitInfo ) -> void:

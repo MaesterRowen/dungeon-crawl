@@ -1,5 +1,9 @@
 extends CharacterBody3D
 
+@export_group("Prototype")
+@export var ice_attack : PackedScene
+@export var fire_attack : PackedScene
+
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
 
@@ -20,16 +24,21 @@ extends CharacterBody3D
 @onready var _combat_component : CombatComponent = $CombatComponent
 @onready var attack_controller: AttackController = $AttackController
 @onready var weapon_handler: WeaponHandler = $WeaponHandler
+@onready var magic_controller: MagicController = $MagicController
 
-
+var _camera_move := false
 var _move_direction := Vector3.ZERO
 var _camera_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.FORWARD
 var _gravity := -30.0
+var _offset := Vector3.ZERO
+var _shake_tween: Tween
+var _base_pos : Vector3
 
 func _ready() -> void:
+	_base_pos = _camera.position
 	attack_controller.attack_started.connect(_on_attack_started)
-	
+	magic_controller.location_picked.connect(_on_spell_location_picked)
 	# Connect to Animation Notify Signals
 	_character.anim_notify_start_damage.connect(attack_controller.phase_enter_active)
 	_character.anim_notify_stop_damage.connect(attack_controller.phase_exit_active)
@@ -37,18 +46,94 @@ func _ready() -> void:
 	_character.anim_notify_open_cancel.connect(attack_controller.enable_cancel)
 	_character.anim_notify_close_cancel.connect(attack_controller.disable_cancel)
 	
+	SignalBus.camera_shake.connect(_on_camera_shake)
+	
 	# Equip Weapon
 	_spawn_weapon()
+	
+func shake(intensity: float = 0.2, duration: float = 0.25, frequency: int = 20) -> void:
+	if _shake_tween:
+		_shake_tween.kill()
+
+	_base_pos = _camera.position
+
+	_shake_tween = _camera.create_tween()
+	_shake_tween.set_trans(Tween.TRANS_SINE)
+	_shake_tween.set_ease(Tween.EASE_IN_OUT)
+
+	var step_time := duration / float(max(frequency, 1))
+
+	for i in range(frequency):
+		var jitter := Vector3(
+			randf_range(-intensity, intensity),
+			randf_range(-intensity, intensity),
+			0.0
+		)
+		_shake_tween.tween_property(_camera, "position", _base_pos + jitter, step_time)
+
+	_shake_tween.tween_property(_camera, "position", _base_pos, step_time)
+	
+	
+func _on_camera_shake(intensity: float) -> void:
+	shake(intensity, 0.25, 20)
 	
 func _on_attack_started( attack: AttackData ) -> void:
 	_character.play_attack(attack.animation_name)
 
+func _on_spell_hit_target(info: HitInfo) -> void:
+	print("hit target: ", info.hurtbox.owner_actor.name)
+	if _combat_component:
+		_combat_component._on_weapon_hit(info)
+
+
+func _on_spell_location_picked(pos: Vector3) -> void:
+	# Rotate the player toward the cursor position
+	_last_movement_direction = (pos - global_position).normalized()
+	magic_controller.deactivate.call_deferred()
+	#_do_ice_attack(pos)
+	_do_fire_attack(pos)
+
+func _do_fire_attack(pos: Vector3) -> void:
+	var instance = fire_attack.instantiate() as MagicAttack
+	instance.on_magic_hit.connect(_on_spell_hit_target)
+	instance.owner_actor = self
+	get_tree().current_scene.add_child(instance)
+	var pmc : ProjectileMovementComponent = instance.get_node_or_null("ProjectileMovementComponent")
+	if pmc:
+		pmc.velocity = (pos - global_position).normalized() * 50.0
+		pmc.initial_speed = 100.0
+		pmc.max_speed = 100.0
+		instance.global_position = global_position + Vector3.UP
+	
+
+func _do_ice_attack(pos: Vector3) -> void:
+	var instance = ice_attack.instantiate() as MagicAttack
+	instance.on_magic_hit.connect(_on_spell_hit_target)
+	instance.owner_actor = self
+	get_tree().current_scene.add_child(instance)	
+	instance.look_at(pos, Vector3.UP)
+	instance.global_position = pos	
+	await get_tree().create_timer(2.0).timeout
+	instance.queue_free()
+
 func _input( event: InputEvent ) -> void:
+	if magic_controller.is_active():
+		if event.is_action_pressed("ui_cancel"):
+			magic_controller.deactivate()
+		return
+	
 	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		
+	#if event.is_action_pressed("activate_camera"):
+		#_camera_move = true
+	#elif event.is_action_released("activate_camera"):
+		#_camera_move = false
+	if event.is_action_pressed("magic"):
+		magic_controller.activate()
+
+	
 	if event.is_action_pressed("light_attack"):
 		attack_controller.request_attack("light_attack")
 

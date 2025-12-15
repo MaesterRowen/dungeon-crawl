@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bts5d8n2u20yo"]
+
+[ext_resource type="Shader" uid="uid://betmbhcdca7ab" path="res://systems/magic/fire_bolt/S_FireShader.tres" id="1_1rkkk"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1rkkk")

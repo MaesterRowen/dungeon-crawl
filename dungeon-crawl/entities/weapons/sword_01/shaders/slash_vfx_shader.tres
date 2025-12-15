@@ -1,4 +1,8 @@
-[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://b7176788c84xo"]
+[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://b7176788c84xo"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_863tf"]
+default_input_values = [0, 0.0, 1, 0.2]
+operator = 2
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_qhiip"]
 parameter_name = "Color"
@@ -79,8 +83,13 @@ void fragment() {
 	float n_out9p0 = Alpha;
 
 
+// FloatOp:10
+	float n_in10p1 = 0.20000;
+	float n_out10p0 = n_out9p0 * n_in10p1;
+
+
 // FloatOp:8
-	float n_out8p0 = n_out7p0.x * n_out9p0;
+	float n_out8p0 = n_out7p0.x * n_out10p0;
 
 
 // Output:0
@@ -110,5 +119,7 @@ nodes/fragment/7/position = Vector2(-40, 380)
 nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_qhiip")
 nodes/fragment/8/position = Vector2(345.57303, 603.2262)
 nodes/fragment/9/node = SubResource("VisualShaderNodeFloatParameter_qhiip")
-nodes/fragment/9/position = Vector2(-20, 720)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 4, 0, 4, 0, 5, 0, 6, 0, 5, 2, 5, 0, 7, 0, 7, 0, 8, 0, 8, 0, 0, 1, 9, 0, 8, 1)
+nodes/fragment/9/position = Vector2(-300, 820)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_863tf")
+nodes/fragment/10/position = Vector2(120, 860)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 4, 0, 4, 0, 5, 0, 6, 0, 5, 2, 5, 0, 7, 0, 7, 0, 8, 0, 8, 0, 0, 1, 9, 0, 10, 0, 10, 0, 8, 1)

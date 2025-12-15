@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		global_position = global_position + knockback_velocity * delta
 
 func _on_hurtbox_hit(info: HitInfo) -> void:
-	print("hit barrel")
+	print("hit barrel - damage: ", info.damage)
 	AudioManager.create_sound(SoundEffect.SOUND_EFFECT_TYPE.CHEST_HIT)
 	hit_dir = info.hit_direction
 	shake_barrel()

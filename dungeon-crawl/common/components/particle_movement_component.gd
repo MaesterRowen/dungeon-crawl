@@ -65,6 +65,11 @@ func _physics_process(delta: float) -> void:
 	if not controlled_node or not active:
 		return
 	
+	_time_alive += delta
+	if _time_alive >= destroy_after_seconds:
+		get_parent().queue_free.call_deferred()
+		return
+	
 	var remaining_time: float = delta
 	var num_impacts := 0
 	var num_bounces := 0
@@ -175,6 +180,8 @@ func _stop_simulating(hit: Dictionary) -> void:
 	pending_force_this_update = Vector3.ZERO
 	controlled_node = null
 	projectile_stop.emit(hit)
+	if destroy_on_impact:
+		get_parent().queue_free.call_deferred()
 
 func _compute_move_delta(in_velocity: Vector3, delta: float) -> Vector3:
 	var new_velocity := _compute_velocity(in_velocity, delta)

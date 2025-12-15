@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3mf1utc6sa8c"]
+
+[ext_resource type="Script" uid="uid://da018a841p3fk" path="res://common/components/particle_movement_component.gd" id="1_4guey"]
+[ext_resource type="Script" uid="uid://dpppqgocqu6jd" path="res://systems/magic/magic_attack.gd" id="1_mya6x"]
+[ext_resource type="PackedScene" uid="uid://dcro5hcsp0ji" path="res://systems/magic/fire_bolt/fire_explosion.tscn" id="2_pi66f"]
+[ext_resource type="Script" uid="uid://uowifw41mga0" path="res://systems/combat/hitbox.gd" id="3_uwe66"]
+[ext_resource type="AudioStream" uid="uid://g52lsvo6w41" path="res://assets/sounds/explode3.wav" id="5_y1r0b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mya6x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4guey"]
+albedo_color = Color(4.0048027, 1.4197081, 0.94930726, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4guey"]
+radius = 0.3
+height = 0.6
+
+[node name="FireBolt" type="Node3D" node_paths=PackedStringArray("projectile")]
+script = ExtResource("1_mya6x")
+projectile = NodePath("ProjectileMovementComponent")
+destroy_on_impact = true
+impact_effect = ExtResource("2_pi66f")
+camera_shake_strength = 0.0
+
+[node name="ProjectileMovementComponent" type="Node" parent="." node_paths=PackedStringArray("collision_volume")]
+script = ExtResource("1_4guey")
+collision_volume = NodePath("../HitBox3D")
+destroy_after_seconds = 3.0
+use_gravity = false
+velocity = Vector3(0, 0, -1)
+destroy_on_impact = false
+initial_speed = 100.0
+max_speed = 100.0
+projectile_gravity_scale = 0.0
+metadata/_custom_type_script = "uid://da018a841p3fk"
+
+[node name="HitBox3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 10
+script = ExtResource("3_uwe66")
+metadata/_custom_type_script = "uid://uowifw41mga0"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox3D"]
+shape = SubResource("SphereShape3D_mya6x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_4guey")
+mesh = SubResource("SphereMesh_4guey")
+skeleton = NodePath("../ProjectileMovementComponent")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_y1r0b")
+autoplay = true
+bus = &"SFX"

@@ -1,0 +1,12 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://b5usi4geso5bu"]
+
+[ext_resource type="AudioStream" uid="uid://681h70naxwl4" path="res://assets/sounds/swipe_03.WAV" id="1_u6fjq"]
+[ext_resource type="AudioStream" uid="uid://csijgrsydhc0u" path="res://assets/sounds/swipe_04.WAV" id="2_pxvg2"]
+[ext_resource type="AudioStream" uid="uid://ddvy5mw8thijm" path="res://assets/sounds/swipe_05.WAV" id="3_wbr1a"]
+
+[resource]
+random_pitch = 1.08
+streams_count = 3
+stream_0/stream = ExtResource("1_u6fjq")
+stream_1/stream = ExtResource("2_pxvg2")
+stream_2/stream = ExtResource("3_wbr1a")

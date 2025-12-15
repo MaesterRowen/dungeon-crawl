@@ -7,7 +7,7 @@ signal anim_notify_open_cancel
 signal anim_notify_close_cancel
 
 @onready var anim_tree: AnimationTree = %AnimationTree
-
+@onready var audio_player: AudioStreamPlayer3D = %AudioStreamPlayer3D
 
 func _ready() -> void:
 	anim_tree.active = true
@@ -41,6 +41,7 @@ func play_attack( anim_name: String) -> void:
 # Animation Notifies
 # ---------------------------
 func emitAnimNotifyStartDamage() -> void:
+	audio_player.play()
 	anim_notify_start_damage.emit()
 	
 func emitAnimNotifyStopDamage() -> void:

@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://bjx16ck1v85x1"]
+[gd_scene load_steps=6 format=4 uid="uid://bjx16ck1v85x1"]
 
 [ext_resource type="Script" uid="uid://dn4avt2txcj3m" path="res://systems/combat/weapon.gd" id="1_58g1g"]
-[ext_resource type="Script" uid="uid://uowifw41mga0" path="res://systems/combat/hitbox.gd" id="2_vcp1d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hs656"]
 resource_name = "M_LP_RPGWepons_01"
@@ -40,9 +39,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ffmip")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ub7rg"]
-radius = 0.39257813
-height = 1.3105164
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ne7kj"]
+radius = 0.21
+height = 1.25
 
 [node name="Sword01" type="Node3D"]
 script = ExtResource("1_58g1g")
@@ -55,13 +54,12 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_58g1g")
 skeleton = NodePath("")
 
-[node name="HitBox" type="Area3D" parent="."]
-collision_layer = 0
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8941189, 0)
+enabled = false
+shape = SubResource("CapsuleShape3D_ne7kj")
+target_position = Vector3(0, 0, 0)
 collision_mask = 10
-monitorable = false
-script = ExtResource("2_vcp1d")
-metadata/_custom_type_script = "uid://uowifw41mga0"
-
-[node name="CollisionShape" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75242615, 0)
-shape = SubResource("CapsuleShape3D_ub7rg")
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_custom_color = Color(1, 0, 0, 1)
