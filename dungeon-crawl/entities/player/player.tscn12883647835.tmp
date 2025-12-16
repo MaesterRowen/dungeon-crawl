@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://bdc5x4gc1jcne" path="res://common/utilities/state_machine/state_machine.gd" id="8_eyb6c"]
 [ext_resource type="Script" uid="uid://ujqrm0n4mpir" path="res://entities/player/states/player_locomotion_idle.gd" id="9_221hk"]
 [ext_resource type="Resource" uid="uid://cr28yq8phclbq" path="res://entities/weapons/sword_01/attack_data/light_attack_3.tres" id="9_a1qjk"]
-[ext_resource type="Script" uid="uid://dlgnoxmvgeksx" path="res://entities/player/states/player_action_listen_for_input.gd" id="9_ghoj8"]
+[ext_resource type="Script" uid="uid://dlgnoxmvgeksx" path="res://entities/player/states/player_action_none.gd" id="9_ghoj8"]
 [ext_resource type="Script" uid="uid://d0m5ywchc1h50" path="res://entities/player/states/player_locomotion_move.gd" id="10_221hk"]
 [ext_resource type="PackedScene" uid="uid://b1a47bxar58li" path="res://vfx/hit_impact/hit_vfx.tscn" id="10_b2kln"]
 [ext_resource type="Resource" uid="uid://d3j1pupy8bpml" path="res://entities/weapons/sword_01/attack_data/light_attack_1.tres" id="10_j3ovn"]
@@ -61,6 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7330661, -0.6911343)
 [node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+visible = false
 
 [node name="StateMachines" type="Node" parent="."]
 

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://chufl40sxmh2i"]
+
+[ext_resource type="Script" uid="uid://cphuduxnwa2ha" path="res://systems/camera/camera_rig.gd" id="1_nbfag"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nbfag"]
+
+[node name="CameraRig" type="Node3D" groups=["camera_rig"]]
+script = ExtResource("1_nbfag")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+shape = SubResource("SphereShape3D_nbfag")
+spring_length = 6.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" groups=["camera"]]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)

@@ -74,35 +74,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.705601, 0, 9.479737)
 
 [node name="CameraRig" parent="." instance=ExtResource("7_4qc3i")]
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -55.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 16
-
-[node name="Label" type="Label" parent="Control/MarginContainer" groups=["debug_label"]]
-layout_mode = 2
-text = "DEBUG"
-horizontal_alignment = 2
-vertical_alignment = 2

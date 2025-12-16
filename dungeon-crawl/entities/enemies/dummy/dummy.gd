@@ -3,13 +3,14 @@ extends CharacterBody3D
 @onready var combat_component: CombatComponent = $CombatComponent
 @onready var perception: PerceptionComponent = %PerceptionComponent
 @onready var animator: AnimationPlayer = $AnimationPlayer
+@onready var health_component: HealthComponent = $HealthComponent
 
 const GRAVITY := -9.8
 var animation_locked := false
 
 func _ready() -> void:
 	combat_component.received_damage.connect(_on_received_damage)
-	
+	health_component.died.connect(_on_died)
 	perception.target_acquired.connect(_on_perception_target_acquired)
 	perception.target_lost.connect(_on_perception_target_lost)
 
@@ -19,6 +20,9 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 	_update_animations()
+
+func _on_died() -> void:
+	queue_free.call_deferred()
 
 func _update_animations() -> void:
 	if animation_locked:

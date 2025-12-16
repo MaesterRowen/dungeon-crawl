@@ -28,7 +28,7 @@ func _on_projectile_stopped(hit_result: Dictionary) -> void:
 
 func _on_hit_started(info : HitInfo) -> void:
 	info.attack_type = "magic"
-	info.damage = 50
+	info.damage = 100
 	info.origin_actor = owner_actor
 	on_magic_hit.emit(info)
 	SignalBus.camera_shake.emit(camera_shake_strength)

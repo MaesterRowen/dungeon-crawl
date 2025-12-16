@@ -43,6 +43,10 @@ func _input(event: InputEvent) -> void:
 	if current_state:
 		current_state.handle_input(event)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if current_state:
+		current_state.unhandled_input(event)
+
 func _process(delta: float) -> void:
 	if current_state:
 		current_state.update(delta)

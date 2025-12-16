@@ -78,9 +78,3 @@ func get_mouse_world_position() -> Vector3:
 	if result:
 		return result.position
 	return Vector3.ZERO
-
-func _process(delta: float) -> void:
-	if not _is_active:
-		return
-		
-	#_cursor_instance.global_position = get_parent().global_position
