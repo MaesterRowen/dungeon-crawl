@@ -25,6 +25,11 @@ DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 AudioManager="*res://common/managers/audio/audio_manager.tscn"
 SignalBus="*res://common/managers/signal_bus/signal_bus.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [dotnet]
 
 project/assembly_name="dungeon-crawl"
