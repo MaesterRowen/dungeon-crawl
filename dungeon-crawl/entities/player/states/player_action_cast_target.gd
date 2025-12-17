@@ -3,21 +3,27 @@ extends State
 @export var player: CharacterBody3D
 @export var character: HeroCharacter
 @export var magic_cursor : PackedScene
+@export var controller : PlayerController
 
 var _cursor_instance : Node3D = null
 
 func enter(_msg := {} ) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	#controller.set_speed_multiplier("cast_target", 0.25)
 	_create_cursor()
 
 func exit() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#controller.clear_speed_multiplier("cast_target")
 	_release_cursor()
 	
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		var pos := _cursor_instance.global_position
-		transition_to("IceSpikeSpell", { "position" : pos})
+		transition_to("FireballSpell", { 
+			"position" : pos,
+			"direction" : Vector3.FORWARD
+		})
 	elif event.is_action_pressed("ui_cancel"):
 		transition_to.call_deferred("ListenForInput")
 

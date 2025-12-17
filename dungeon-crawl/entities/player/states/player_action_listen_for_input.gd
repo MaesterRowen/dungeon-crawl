@@ -1,9 +1,12 @@
 extends State
-
+@export var controller: PlayerController
 func enter(_msg := {} ) -> void:
 	print("entered None")
 
 func handle_input(event: InputEvent) -> void:
+	if controller.actions_locked():
+		return
+		
 	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	

@@ -64,6 +64,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.887148, -2.3841858e-07, -1
 [node name="DoorWay2" parent="NavigationRegion3D/Level_TestDungeon" instance=ExtResource("3_om45m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.887148, -2.3841858e-07, -11.927092)
 
+[node name="Level_TestDungeon2" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00024032593, 0, 53)
+
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D/Level_TestDungeon2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+collision_mask = 0
+size = Vector3(50, 0.5, 50)
+material = SubResource("StandardMaterial3D_w838b")
+
+[node name="DoorWay" parent="NavigationRegion3D/Level_TestDungeon2" instance=ExtResource("3_om45m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.887148, -2.3841858e-07, -11.927092)
+
+[node name="DoorWay2" parent="NavigationRegion3D/Level_TestDungeon2" instance=ExtResource("3_om45m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.887148, -2.3841858e-07, -11.927092)
+
 [node name="TreasureChest" parent="NavigationRegion3D" instance=ExtResource("4_ctgmk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8400097, 0.014373124, -12.079309)
 

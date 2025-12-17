@@ -7,15 +7,16 @@ extends State
 
 func enter(msg := {} ) -> void:
 	var position := msg["position"] as Vector3
-	_do_ice_attack(position)
+	var direction := msg["direction"] as Vector3
+	_do_ice_attack(position, direction)
 	transition_to("ListenForInput")
 	
-func _do_ice_attack(pos: Vector3) -> void:
+func _do_ice_attack(pos: Vector3, direction: Vector3) -> void:
 	var instance = ice_attack.instantiate() as MagicAttack
 	instance.on_magic_hit.connect(combat_component._on_weapon_hit)
 	instance.owner_actor = player
 	get_tree().current_scene.add_child(instance)
-	instance.look_at(pos, Vector3.UP)
+	instance.look_at(direction, Vector3.UP)
 	instance.global_position = pos	
 	await get_tree().create_timer(2.0).timeout
 	instance.queue_free()

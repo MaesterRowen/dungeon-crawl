@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var _character: HeroCharacter = %HeroCharacter
 @onready var attack_controller: AttackController = $AttackController
 @onready var weapon_handler: WeaponHandler = $WeaponHandler
+@onready var controller: PlayerController = $PlayerController
 
 @onready var action_fsm: StateMachine = $StateMachines/ActionFSM
 @onready var locomotion_fsm: StateMachine = $StateMachines/LocomotionFSM
@@ -40,6 +41,21 @@ func _ready() -> void:
 	
 	# Spawn & Equip Starting Weapon
 	_spawn_weapon()
+
+func _physics_process(delta: float) -> void:
+	# Let the controller decide XZ + rotation
+	controller.tick_physics(delta)
+	
+	# Update velocity related animation states
+	if not is_on_floor() and velocity.y < 0.0:
+		_character.fall()
+	elif is_on_floor():
+		var ground_speed := velocity.length()
+		var speed_ratio = ground_speed / controller.max_ground_speed()
+		_character.set_player_speed(speed_ratio)	
+	
+	# Move the character
+	move_and_slide()
 
 func _spawn_weapon() -> void:
 	if not active_weapon:

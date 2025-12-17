@@ -28,9 +28,27 @@ func _enter_initial_state() -> void:
 	state_changed.emit.call_deferred(initial_state)
 	current_state.enter()
 
+func interrupt_to(target: String, reason: StringName, ctx := {} ) -> bool:
+	if not states.has(target):
+		push_warning("Cannot interrupt to unknown state '%s'" % target)
+		return false
+	
+	if current_state:
+		if current_state.name == target: return true
+		if not current_state.can_be_interrupted(reason): return false
+		current_state.handle_interrupt(reason, ctx)
+		current_state.exit()
+	
+	current_state = states[target]
+	state_changed.emit(target)
+	var enter_msg := ctx.duplicate()
+	enter_msg["interrupt_reason"] = reason
+	current_state.enter(enter_msg)
+	return true
+
 func transition_to(target: String, msg := {} ) -> void:
 	if not states.has(target):
-		push_warning("Cannot transition to unkonwn state '%s'" % target)
+		push_warning("Cannot transition to unknown state '%s'" % target)
 		return
 	
 	if current_state:

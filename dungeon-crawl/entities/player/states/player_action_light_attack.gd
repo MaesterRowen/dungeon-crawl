@@ -2,6 +2,7 @@ extends State
 
 @export var attack_controller: AttackController
 @export var character: HeroCharacter
+@export var controller : PlayerController
 
 func _ready() -> void:
 	attack_controller.attack_started.connect(_on_attack_started)

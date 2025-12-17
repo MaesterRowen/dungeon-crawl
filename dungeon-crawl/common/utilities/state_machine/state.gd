@@ -13,7 +13,13 @@ func handle_input(_event: InputEvent) -> void:
 
 func unhandled_input(_event: InputEvent) -> void:
 	pass
+
+func handle_interrupt( reason: StringName, ctc := {}):
+	pass
 	
+func can_be_interrupted(reason: StringName) -> bool:
+	return true
+
 func update(_delta: float) -> void:
 	pass
 	
