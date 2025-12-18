@@ -21,6 +21,8 @@ class_name AttackData extends Resource
 
 @export_group("Animation")
 @export var animation_name: StringName = "attack_01"
+@export var lunge_direction: Vector3 = Vector3.ZERO
+@export var lunge_duration: float = 0.0
 
 @export_group("Other")
 @export var metadata : Dictionary = {}

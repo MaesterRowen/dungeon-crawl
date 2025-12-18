@@ -1,17 +1,17 @@
 extends State
-@export var controller: PlayerController
+@export var controller: PlayerMotor
 func enter(_msg := {} ) -> void:
 	print("entered None")
 
-func handle_input(event: InputEvent) -> void:
-	if controller.actions_locked():
-		return
-		
+func handle_input(event: InputEvent) -> void:	
 	if event.is_action_pressed("left_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	if controller.actions_locked():
+		return
 	
 	if event.is_action_pressed("light_attack"):
 		transition_to("LightAttack", { "input" : "light_attack"})

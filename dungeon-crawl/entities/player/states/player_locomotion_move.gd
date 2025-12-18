@@ -1,7 +1,7 @@
 extends State
 
 @export_group("Movement")
-@export var controller: PlayerController
+@export var controller: PlayerMotor
 @export var move_speed := 8.0
 
 #var _move_direction := Vector3.ZERO

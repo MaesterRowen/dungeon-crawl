@@ -5,23 +5,21 @@ extends CharacterBody3D
 @onready var _character: HeroCharacter = %HeroCharacter
 @onready var attack_controller: AttackController = $AttackController
 @onready var weapon_handler: WeaponHandler = $WeaponHandler
-@onready var controller: PlayerController = $PlayerController
+@onready var controller: PlayerMotor = $PlayerMotor
 
-@onready var action_fsm: StateMachine = $StateMachines/ActionFSM
-@onready var locomotion_fsm: StateMachine = $StateMachines/LocomotionFSM
+@onready var state_coordinator : PlayerStateCoordinator = $StateCoordinator
 
 var locomotion_state: String = ""
 var action_state : String = ""
 
-func _on_locomotion_state_changed(state: String) -> void:
-	locomotion_state = state
+func _on_state_changed(machine_type: PlayerStateCoordinator.MachineType, state: String) -> void:
 	var label := get_tree().get_first_node_in_group("debug_label") as Label
-	label.text = locomotion_state + "|" + action_state
-
-func _on_action_state_changed(state: String) -> void:
-	action_state = state
-	var label := get_tree().get_first_node_in_group("debug_label") as Label
-	label.text = locomotion_state + "|" + action_state
+	if machine_type == PlayerStateCoordinator.MachineType.LOCOMOTION:
+		locomotion_state = state
+	elif machine_type == PlayerStateCoordinator.MachineType.ACTION:
+		action_state = state
+	
+	label.text = locomotion_state + "|" + action_state	
 
 func _ready() -> void:
 	# Configure the camera rig to follow this player
@@ -36,8 +34,7 @@ func _ready() -> void:
 	_character.anim_notify_open_cancel.connect(attack_controller.enable_cancel)
 	_character.anim_notify_close_cancel.connect(attack_controller.disable_cancel)
 	
-	locomotion_fsm.state_changed.connect(_on_locomotion_state_changed)
-	action_fsm.state_changed.connect(_on_action_state_changed)
+	state_coordinator.state_changed.connect(_on_state_changed)
 	
 	# Spawn & Equip Starting Weapon
 	_spawn_weapon()

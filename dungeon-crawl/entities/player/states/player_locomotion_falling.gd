@@ -1,6 +1,6 @@
 extends State
 
-@export var controller: PlayerController
+@export var controller: PlayerMotor
 
 func enter(_msg := {} ) -> void:
 	pass

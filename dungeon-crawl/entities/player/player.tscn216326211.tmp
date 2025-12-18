@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bv6ti3wo30g3q"]
+[gd_scene load_steps=32 format=3 uid="uid://bv6ti3wo30g3q"]
 
 [ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="PackedScene" uid="uid://duvmrsslohipu" path="res://entities/player/hero_character/hero_character.tscn" id="1_symyc"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://d3mf1utc6sa8c" path="res://systems/magic/fire_bolt/fire_bolt.tscn" id="3_we0b7"]
 [ext_resource type="Script" uid="uid://bebggy0l3np0u" path="res://systems/combat/weapon_handler.gd" id="4_bls4j"]
 [ext_resource type="Script" uid="uid://b6twvppuki0oe" path="res://systems/combat/combat_component.gd" id="5_fkugw"]
-[ext_resource type="Script" uid="uid://b5rhro3ya7qpe" path="res://entities/player/player_state_coordinator.gd" id="7_24ehl"]
 [ext_resource type="Script" uid="uid://ddleiwlt36cut" path="res://systems/combat/attack_controller.gd" id="7_qiwj3"]
 [ext_resource type="Script" uid="uid://cvuwk0c2cemux" path="res://systems/combat/attack_data.gd" id="8_7thud"]
 [ext_resource type="Script" uid="uid://bdc5x4gc1jcne" path="res://common/utilities/state_machine/state_machine.gd" id="8_eyb6c"]
@@ -74,65 +73,62 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7330661, -0.6911343)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
-[node name="StateCoordinator" type="Node" parent="." node_paths=PackedStringArray("action_fsm", "locomtion_fsm")]
-script = ExtResource("7_24ehl")
-action_fsm = NodePath("ActionFSM")
-locomtion_fsm = NodePath("LocomotionFSM")
+[node name="StateMachines" type="Node" parent="."]
 
-[node name="ActionFSM" type="Node" parent="StateCoordinator"]
+[node name="ActionFSM" type="Node" parent="StateMachines"]
 script = ExtResource("8_eyb6c")
 initial_state = "ListenForInput"
 metadata/_custom_type_script = "uid://bdc5x4gc1jcne"
 
-[node name="ListenForInput" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("controller")]
+[node name="ListenForInput" type="Node" parent="StateMachines/ActionFSM" node_paths=PackedStringArray("controller")]
 script = ExtResource("9_ghoj8")
 controller = NodePath("../../../PlayerMotor")
 
-[node name="LightAttack" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("attack_controller", "character", "controller")]
+[node name="LightAttack" type="Node" parent="StateMachines/ActionFSM" node_paths=PackedStringArray("attack_controller", "character", "controller")]
 script = ExtResource("10_t1t22")
 attack_controller = NodePath("../../../AttackController")
 character = NodePath("../../../HeroCharacter")
 controller = NodePath("../../../PlayerMotor")
 
-[node name="FireballSpell" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("combat_component", "player", "character")]
+[node name="FireballSpell" type="Node" parent="StateMachines/ActionFSM" node_paths=PackedStringArray("combat_component", "player", "character")]
 script = ExtResource("11_50fht")
 combat_component = NodePath("../../../CombatComponent")
 player = NodePath("../../..")
 character = NodePath("../../../HeroCharacter")
 fire_attack = ExtResource("3_we0b7")
 
-[node name="IceSpikeSpell" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("combat_component", "player", "character")]
+[node name="IceSpikeSpell" type="Node" parent="StateMachines/ActionFSM" node_paths=PackedStringArray("combat_component", "player", "character")]
 script = ExtResource("12_wuv6x")
 combat_component = NodePath("../../../CombatComponent")
 player = NodePath("../../..")
 character = NodePath("../../../HeroCharacter")
 ice_attack = ExtResource("2_gx6sm")
 
-[node name="CastTarget" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("player", "character", "controller")]
+[node name="CastTarget" type="Node" parent="StateMachines/ActionFSM" node_paths=PackedStringArray("player", "character", "controller")]
 script = ExtResource("13_qpopc")
 player = NodePath("../../..")
 character = NodePath("../../../HeroCharacter")
 magic_cursor = ExtResource("17_3wlsy")
 controller = NodePath("../../../PlayerMotor")
 
-[node name="LocomotionFSM" type="Node" parent="StateCoordinator"]
+[node name="LocomotionFSM" type="Node" parent="StateMachines"]
 script = ExtResource("8_eyb6c")
 initial_state = "Idle"
 metadata/_custom_type_script = "uid://bdc5x4gc1jcne"
 
-[node name="Idle" type="Node" parent="StateCoordinator/LocomotionFSM" node_paths=PackedStringArray("controller")]
+[node name="Idle" type="Node" parent="StateMachines/LocomotionFSM" node_paths=PackedStringArray("controller")]
 script = ExtResource("9_221hk")
 controller = NodePath("../../../PlayerMotor")
 
-[node name="Move" type="Node" parent="StateCoordinator/LocomotionFSM" node_paths=PackedStringArray("controller")]
+[node name="Move" type="Node" parent="StateMachines/LocomotionFSM" node_paths=PackedStringArray("controller")]
 script = ExtResource("10_221hk")
 controller = NodePath("../../../PlayerMotor")
 
-[node name="Jump" type="Node" parent="StateCoordinator/LocomotionFSM" node_paths=PackedStringArray("controller")]
+[node name="Jump" type="Node" parent="StateMachines/LocomotionFSM" node_paths=PackedStringArray("controller")]
 script = ExtResource("18_wq0jh")
 controller = NodePath("../../../PlayerMotor")
 
-[node name="Fall" type="Node" parent="StateCoordinator/LocomotionFSM" node_paths=PackedStringArray("controller")]
+[node name="Fall" type="Node" parent="StateMachines/LocomotionFSM" node_paths=PackedStringArray("controller")]
 script = ExtResource("19_gt4e4")
 controller = NodePath("../../../PlayerMotor")
 

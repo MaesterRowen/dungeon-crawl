@@ -1,6 +1,6 @@
 extends State
 
-@export var controller: PlayerController
+@export var controller: PlayerMotor
 
 func enter(_msg := {} ) -> void:
 	# Configure the camera rig to follow this player

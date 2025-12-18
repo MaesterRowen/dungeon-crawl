@@ -1,4 +1,4 @@
-class_name PlayerController extends Node
+class_name PlayerMotor extends Node
 
 @export_node_path("HeroCharacter") var model_root_path
 @onready var model_root: HeroCharacter = get_node(model_root_path)

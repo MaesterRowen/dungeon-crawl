@@ -20,6 +20,9 @@ func _cache_states() -> void:
 			states[child.name] = child
 			child.state_machine = self
 
+func get_current_state() -> String:
+	return current_state.name
+
 func _enter_initial_state() -> void:
 	if not states.has(initial_state):
 		push_warning("Initial state '%s' not found" % initial_state)

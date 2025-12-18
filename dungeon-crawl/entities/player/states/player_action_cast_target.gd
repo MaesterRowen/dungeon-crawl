@@ -3,7 +3,7 @@ extends State
 @export var player: CharacterBody3D
 @export var character: HeroCharacter
 @export var magic_cursor : PackedScene
-@export var controller : PlayerController
+@export var controller : PlayerMotor
 
 var _cursor_instance : Node3D = null
 
