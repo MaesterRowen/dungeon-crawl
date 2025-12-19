@@ -1,8 +1,7 @@
 extends CharacterBody3D
 
 @export var active_weapon: WeaponData = null
-
-@onready var _character: HeroCharacter = %HeroCharacter
+@onready var _character: HeroCharacter = %MainCharacter
 @onready var attack_controller: AttackController = $AttackController
 @onready var weapon_handler: WeaponHandler = $WeaponHandler
 @onready var controller: PlayerMotor = $PlayerMotor

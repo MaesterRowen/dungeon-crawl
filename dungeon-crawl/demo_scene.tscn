@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bllr5nd138vyi"]
 
 [ext_resource type="Texture2D" uid="uid://dsxh3r41s87ay" path="res://entities/skysphere/PartlyCloudy_2K.exr" id="1_1hm1i"]
-[ext_resource type="PackedScene" uid="uid://bv6ti3wo30g3q" path="res://entities/player/player.tscn" id="2_om45m"]
+[ext_resource type="PackedScene" uid="uid://ds6lbrpriy4si" path="res://entities/player/player_r1.tscn" id="2_6qj3o"]
 [ext_resource type="Texture2D" uid="uid://s44tl63180td" path="res://assets/textures/Poliigon_GrassPatchyGround_4585_BaseColor.jpg" id="3_mssda"]
 [ext_resource type="PackedScene" uid="uid://dr102l4cgjukt" path="res://entities/objects/interactables/door_way/door_way.tscn" id="3_om45m"]
 [ext_resource type="Texture2D" uid="uid://cx21ypbafoxju" path="res://assets/textures/Poliigon_GrassPatchyGround_4585_AmbientOcclusion.jpg" id="4_6qj3o"]
@@ -57,7 +57,7 @@ environment = SubResource("Environment_1bvp3")
 transform = Transform3D(0.98821235, -0.13257927, 0.07654463, 2.5945058e-08, 0.49999988, 0.8660253, -0.1530893, -0.85581696, 0.49410602, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("2_om45m")]
+[node name="Player2" parent="." instance=ExtResource("2_6qj3o")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_1hm1i")

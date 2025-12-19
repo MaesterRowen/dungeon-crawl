@@ -1,0 +1,170 @@
+[gd_scene load_steps=33 format=3 uid="uid://ds6lbrpriy4si"]
+
+[ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_dxgn1"]
+[ext_resource type="Resource" uid="uid://bj1dhv1qg4e0r" path="res://entities/weapons/sword_01/sword01.tres" id="2_mryeo"]
+[ext_resource type="Script" uid="uid://cgmxvcwn30pmj" path="res://entities/player/player_controller.gd" id="3_6r365"]
+[ext_resource type="PackedScene" uid="uid://cn3chivr6ftnh" path="res://entities/player/main_character/main_character.tscn" id="4_mryeo"]
+[ext_resource type="Script" uid="uid://dyapp46ilim15" path="res://systems/combat/hurtbox.gd" id="5_g3wr0"]
+[ext_resource type="PackedScene" uid="uid://c0kcryoabc65r" path="res://systems/interaction/interacting_component.tscn" id="6_05uxq"]
+[ext_resource type="Script" uid="uid://b5rhro3ya7qpe" path="res://entities/player/player_state_coordinator.gd" id="7_s1mm3"]
+[ext_resource type="Script" uid="uid://bdc5x4gc1jcne" path="res://common/utilities/state_machine/state_machine.gd" id="8_4h2p6"]
+[ext_resource type="Script" uid="uid://dlgnoxmvgeksx" path="res://entities/player/states/player_action_listen_for_input.gd" id="9_jysrl"]
+[ext_resource type="Script" uid="uid://cjq77yy2ap1g5" path="res://entities/player/states/player_action_light_attack.gd" id="10_krv5x"]
+[ext_resource type="Script" uid="uid://bau4vh8nfaw8e" path="res://entities/player/states/player_action_fireball.gd" id="11_5vo41"]
+[ext_resource type="PackedScene" uid="uid://d3mf1utc6sa8c" path="res://systems/magic/fire_bolt/fire_bolt.tscn" id="12_ffko3"]
+[ext_resource type="Script" uid="uid://dw1fwkuowcrg5" path="res://entities/player/states/player_action_icespike.gd" id="13_hrrfm"]
+[ext_resource type="PackedScene" uid="uid://cimri1mlwg7j0" path="res://systems/magic/ice_spell/ice_attack.tscn" id="14_uoqyl"]
+[ext_resource type="Script" uid="uid://ru3vreh4e1dc" path="res://entities/player/states/player_action_cast_target.gd" id="15_geqla"]
+[ext_resource type="PackedScene" uid="uid://b24jjya6hxxm8" path="res://systems/magic/ice_spell/ice_cursor.tscn" id="16_3a3f5"]
+[ext_resource type="Script" uid="uid://ujqrm0n4mpir" path="res://entities/player/states/player_locomotion_idle.gd" id="17_qvpfg"]
+[ext_resource type="Script" uid="uid://d0m5ywchc1h50" path="res://entities/player/states/player_locomotion_move.gd" id="18_3s2lv"]
+[ext_resource type="Script" uid="uid://cfmjieqsgj807" path="res://entities/player/states/player_locomotion_jump.gd" id="19_2cnc7"]
+[ext_resource type="Script" uid="uid://cfefvgc6n3kgv" path="res://entities/player/states/player_locomotion_falling.gd" id="20_fx0o6"]
+[ext_resource type="Script" uid="uid://c1hl4hlurw1ml" path="res://common/components/health_component.gd" id="21_aj0mn"]
+[ext_resource type="Script" uid="uid://bebggy0l3np0u" path="res://systems/combat/weapon_handler.gd" id="22_54c0x"]
+[ext_resource type="Script" uid="uid://b6twvppuki0oe" path="res://systems/combat/combat_component.gd" id="23_5ua78"]
+[ext_resource type="PackedScene" uid="uid://b1a47bxar58li" path="res://vfx/hit_impact/hit_vfx.tscn" id="24_w22xp"]
+[ext_resource type="Script" uid="uid://ddleiwlt36cut" path="res://systems/combat/attack_controller.gd" id="25_tfmy6"]
+[ext_resource type="Script" uid="uid://cvuwk0c2cemux" path="res://systems/combat/attack_data.gd" id="26_35ynk"]
+[ext_resource type="Resource" uid="uid://d3j1pupy8bpml" path="res://entities/weapons/sword_01/attack_data/light_attack_1.tres" id="27_64pfb"]
+[ext_resource type="Resource" uid="uid://efrlr6m2dkk5" path="res://entities/weapons/sword_01/attack_data/light_attack_2.tres" id="28_6hgni"]
+[ext_resource type="Resource" uid="uid://cr28yq8phclbq" path="res://entities/weapons/sword_01/attack_data/light_attack_3.tres" id="29_7dh1n"]
+[ext_resource type="Script" uid="uid://dty2134yb765e" path="res://systems/inventory/inventory_component.gd" id="30_38o72"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfv1e"]
+radius = 0.27001953
+height = 1.6635742
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qiwj3"]
+radius = 0.30810547
+height = 1.2316895
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_layer = 4
+script = ExtResource("1_dxgn1")
+active_weapon = ExtResource("2_mryeo")
+
+[node name="CapsuleCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8317871, 0)
+shape = SubResource("CapsuleShape3D_sfv1e")
+
+[node name="PlayerMotor" type="Node" parent="."]
+script = ExtResource("3_6r365")
+model_root_path = NodePath("../MainCharacter")
+friction = 80.0
+stopping_speed = 30.0
+jump_velocity = 8.0
+metadata/_custom_type_script = "uid://cgmxvcwn30pmj"
+
+[node name="MainCharacter" parent="." instance=ExtResource("4_mryeo")]
+unique_name_in_owner = true
+
+[node name="HurtBox3D" type="Area3D" parent="MainCharacter"]
+script = ExtResource("5_g3wr0")
+metadata/_custom_type_script = "uid://dyapp46ilim15"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCharacter/HurtBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90808105, 0)
+shape = SubResource("CapsuleShape3D_qiwj3")
+
+[node name="InteractingComponent" parent="MainCharacter" instance=ExtResource("6_05uxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7330661, -0.6911343)
+
+[node name="CameraPivot" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+
+[node name="StateCoordinator" type="Node" parent="." node_paths=PackedStringArray("action_fsm", "locomtion_fsm")]
+script = ExtResource("7_s1mm3")
+action_fsm = NodePath("ActionFSM")
+locomtion_fsm = NodePath("LocomotionFSM")
+
+[node name="ActionFSM" type="Node" parent="StateCoordinator"]
+script = ExtResource("8_4h2p6")
+initial_state = "ListenForInput"
+metadata/_custom_type_script = "uid://bdc5x4gc1jcne"
+
+[node name="ListenForInput" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("controller")]
+script = ExtResource("9_jysrl")
+controller = NodePath("../../../PlayerMotor")
+
+[node name="LightAttack" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("attack_controller", "character", "controller")]
+script = ExtResource("10_krv5x")
+attack_controller = NodePath("../../../AttackController")
+character = NodePath("../../../MainCharacter")
+controller = NodePath("../../../PlayerMotor")
+
+[node name="FireballSpell" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("combat_component", "player", "character")]
+script = ExtResource("11_5vo41")
+combat_component = NodePath("../../../CombatComponent")
+player = NodePath("../../..")
+character = NodePath("../../../MainCharacter")
+fire_attack = ExtResource("12_ffko3")
+
+[node name="IceSpikeSpell" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("combat_component", "player", "character")]
+script = ExtResource("13_hrrfm")
+combat_component = NodePath("../../../CombatComponent")
+player = NodePath("../../..")
+character = NodePath("../../../MainCharacter")
+ice_attack = ExtResource("14_uoqyl")
+
+[node name="CastTarget" type="Node" parent="StateCoordinator/ActionFSM" node_paths=PackedStringArray("player", "character", "controller")]
+script = ExtResource("15_geqla")
+player = NodePath("../../..")
+character = NodePath("../../../MainCharacter")
+magic_cursor = ExtResource("16_3a3f5")
+controller = NodePath("../../../PlayerMotor")
+
+[node name="LocomotionFSM" type="Node" parent="StateCoordinator"]
+script = ExtResource("8_4h2p6")
+initial_state = "Idle"
+metadata/_custom_type_script = "uid://bdc5x4gc1jcne"
+
+[node name="Idle" type="Node" parent="StateCoordinator/LocomotionFSM" node_paths=PackedStringArray("controller")]
+script = ExtResource("17_qvpfg")
+controller = NodePath("../../../PlayerMotor")
+
+[node name="Move" type="Node" parent="StateCoordinator/LocomotionFSM" node_paths=PackedStringArray("controller")]
+script = ExtResource("18_3s2lv")
+controller = NodePath("../../../PlayerMotor")
+
+[node name="Jump" type="Node" parent="StateCoordinator/LocomotionFSM" node_paths=PackedStringArray("controller")]
+script = ExtResource("19_2cnc7")
+controller = NodePath("../../../PlayerMotor")
+
+[node name="Fall" type="Node" parent="StateCoordinator/LocomotionFSM" node_paths=PackedStringArray("controller")]
+script = ExtResource("20_fx0o6")
+controller = NodePath("../../../PlayerMotor")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("21_aj0mn")
+max_health = 500.0
+metadata/_custom_type_script = "uid://c1hl4hlurw1ml"
+
+[node name="WeaponHandler" type="Node" parent="." node_paths=PackedStringArray("character")]
+script = ExtResource("22_54c0x")
+character = NodePath("..")
+metadata/_custom_type_script = "uid://bebggy0l3np0u"
+
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox", "health_component", "weapon_handler")]
+script = ExtResource("23_5ua78")
+hit_effect = ExtResource("24_w22xp")
+hurtbox = NodePath("../MainCharacter/HurtBox3D")
+health_component = NodePath("../HealthComponent")
+weapon_handler = NodePath("../WeaponHandler")
+metadata/_custom_type_script = "uid://b6twvppuki0oe"
+
+[node name="AttackController" type="Node" parent="." node_paths=PackedStringArray("character", "weapon_handler")]
+script = ExtResource("25_tfmy6")
+character = NodePath("..")
+weapon_handler = NodePath("../WeaponHandler")
+combo_tree = Dictionary[String, ExtResource("26_35ynk")]({
+"light_attack_1": ExtResource("27_64pfb"),
+"light_attack_2": ExtResource("28_6hgni"),
+"light_attack_3": ExtResource("29_7dh1n")
+})
+metadata/_custom_type_script = "uid://ddleiwlt36cut"
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("30_38o72")
+metadata/_custom_type_script = "uid://dty2134yb765e"
