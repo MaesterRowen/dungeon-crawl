@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://bv6ti3wo30g3q"]
 
 [ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_abrql"]
-[ext_resource type="PackedScene" uid="uid://duvmrsslohipu" path="res://entities/player/hero_character/hero_character.tscn" id="1_symyc"]
+[ext_resource type="PackedScene" uid="uid://duvmrsslohipu" path="res://entities/player/characters/hero_character/hero_character.tscn" id="1_symyc"]
 [ext_resource type="Resource" uid="uid://bj1dhv1qg4e0r" path="res://entities/weapons/sword_01/sword01.tres" id="2_a1qjk"]
 [ext_resource type="PackedScene" uid="uid://cimri1mlwg7j0" path="res://systems/magic/ice_spell/ice_attack.tscn" id="2_gx6sm"]
 [ext_resource type="Script" uid="uid://dyapp46ilim15" path="res://systems/combat/hurtbox.gd" id="3_8fjmc"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b56g8dd4y0x2o" path="res://entities/player/player.gd" id="1_dxgn1"]
 [ext_resource type="Resource" uid="uid://bj1dhv1qg4e0r" path="res://entities/weapons/sword_01/sword01.tres" id="2_mryeo"]
 [ext_resource type="Script" uid="uid://cgmxvcwn30pmj" path="res://entities/player/player_controller.gd" id="3_6r365"]
-[ext_resource type="PackedScene" uid="uid://cn3chivr6ftnh" path="res://entities/player/main_character/main_character.tscn" id="4_mryeo"]
+[ext_resource type="PackedScene" uid="uid://cn3chivr6ftnh" path="res://entities/player/characters/main_character/main_character.tscn" id="4_mryeo"]
 [ext_resource type="Script" uid="uid://dyapp46ilim15" path="res://systems/combat/hurtbox.gd" id="5_g3wr0"]
 [ext_resource type="PackedScene" uid="uid://c0kcryoabc65r" path="res://systems/interaction/interacting_component.tscn" id="6_05uxq"]
 [ext_resource type="Script" uid="uid://b5rhro3ya7qpe" path="res://entities/player/player_state_coordinator.gd" id="7_s1mm3"]

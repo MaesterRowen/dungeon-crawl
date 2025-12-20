@@ -36,7 +36,7 @@ func _ready() -> void:
 	state_coordinator.state_changed.connect(_on_state_changed)
 	
 	# Spawn & Equip Starting Weapon
-	_spawn_weapon()
+	#_spawn_weapon()
 
 func _physics_process(delta: float) -> void:
 	# Let the controller decide XZ + rotation

@@ -20,7 +20,7 @@ func exit() -> void:
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
 		var pos := _cursor_instance.global_position
-		transition_to("FireballSpell", { 
+		transition_to("IceSpikeSpell", { 
 			"position" : pos,
 			"direction" : Vector3.FORWARD
 		})

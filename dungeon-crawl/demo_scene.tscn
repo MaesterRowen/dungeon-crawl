@@ -57,7 +57,7 @@ environment = SubResource("Environment_1bvp3")
 transform = Transform3D(0.98821235, -0.13257927, 0.07654463, 2.5945058e-08, 0.49999988, 0.8660253, -0.1530893, -0.85581696, 0.49410602, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player2" parent="." instance=ExtResource("2_6qj3o")]
+[node name="Player" parent="." instance=ExtResource("2_6qj3o")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_1hm1i")

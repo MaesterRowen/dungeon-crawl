@@ -9,7 +9,7 @@ script = ExtResource("1_nbfag")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 shape = SubResource("SphereShape3D_nbfag")
-spring_length = 6.0
+spring_length = 4.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" groups=["camera"]]
 unique_name_in_owner = true

@@ -9,5 +9,5 @@ startup_time = 0.6
 active_time = 0.1
 recovery_time = 1.167
 time_scale_factor = 1.5
-animation_name = &"Primary_Attack_A"
+animation_name = &"Primary_Attack_C"
 metadata/_custom_type_script = "uid://cvuwk0c2cemux"

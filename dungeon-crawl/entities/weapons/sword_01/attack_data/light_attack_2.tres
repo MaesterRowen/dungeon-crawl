@@ -13,5 +13,5 @@ can_cancel_on_hit = true
 cancel_window_start = 0.35
 cancel_window_end = 0.55
 next_attacks = Array[String](["light_attack_3"])
-animation_name = &"Primary_Attack_A"
+animation_name = &"Primary_Attack_B"
 metadata/_custom_type_script = "uid://cvuwk0c2cemux"
